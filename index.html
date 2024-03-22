@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel = "Stylesheet" href="../css/home.css">
+    <link rel="icon" type="image/x-icon" href="../images/AJ_Favico.png">
+    <link href='https://fonts.googleapis.com/css?family=Roboto:500,900,100,300,700,400' rel='stylesheet' type='text/css'>
+    <title>AJAL ARCHITECTS </title>
+</head>
+<body>
+
+
+    <div class="container"> 
+      <nav class="stroke">
+        <ul>
+            <li>
+                <div style="float: left;">
+                    <img align="middle" src="../images/AJ_MAIN_LOGO.png" alt="Ajal logo" id="itemImg" style="width: 25px; height: 25px;">
+                </div>
+            </li> 
+          <li><a href="#">Home</a></li>
+          <li><a href="#">Projects</a></li>
+          <li><a href="#">Design Manifesto</a></li>
+          <li><a href="#">Our Story</a></li>
+          <li><a href="#">Team</a></li>
+          <li><a href="#">Awards</a></li>
+          <li><a href="#">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+      
+
+<!--Main Mini Slider-->
+
+
+<div class="slideshow-container">
+
+    <div class="mySlides fade">
+      <div class="numbertext">1 / 3</div>
+      <img src="../images/carousel_1.jpg" style="width:100%">
+      <div class="text">Caption Text</div>
+    </div>
+  
+    <div class="mySlides fade">
+      <div class="numbertext">2 / 3</div>
+      <img src="../images/carousel_2.jpg" style="width:100%">
+      <div class="text">Caption Two</div>
+    </div>
+  
+    <div class="mySlides fade">
+      <div class="numbertext">3 / 3</div>
+      <img src="../images/carousel_3.jpg" style="width:100%">
+      <div class="text">Caption Three</div>
+    </div>
+
+</div>    
+
+
+ 
+    
+    
+    
+    <footer>
+        <p class="footer-title">about company</p>
+      
+            <div>
+                <a href="#" class="social-link">instagram</a>
+                <a href="#" class="social-link">facebook</a>
+                <a href="#" class="social-link">twitter</a>
+            </div>
+        </div>
+    </footer>
+
+<!--Carousel effect-->
+<script>
+let slideIndex = 0;
+showSlides();
+
+function showSlides() {
+  let i;
+  let slides = document.getElementsByClassName("mySlides");
+  for (i = 0; i < slides.length; i++) {
+    slides[i].style.display = "none";
+  }
+  slideIndex++;
+  if (slideIndex > slides.length) {slideIndex = 1}
+  slides[slideIndex-1].style.display = "block";
+  setTimeout(showSlides, 2000); // Change image every 2 seconds
+}
+
+</script>    
+<script src="./script.js"></script> 
+<script src="js/footer.js"></script>
+</body>
+</html>
