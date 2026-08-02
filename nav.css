@@ -154,6 +154,18 @@
 
 .nav__cta:hover svg { transform: translate(3px, -3px); }
 
+/* ---------- right-hand tool cluster ---------- */
+
+/* Keeps the theme toggle and burger grouped at the right edge. Without
+   this they were laid out as independent space-between children, so
+   hiding the CTA on small screens stranded the toggle mid-bar. */
+.nav__tools {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-shrink: 0;
+}
+
 /* ---------- theme toggle ---------- */
 
 .nav__theme {
@@ -194,25 +206,28 @@
   display: none;
   width: 42px; height: 42px;
   place-items: center;
-  gap: 6px;
   border: 1px solid var(--line);
   border-radius: 50%;
   flex-shrink: 0;
 }
 
+/* Both bars occupy the SAME grid cell and are separated only by their
+   own translate. Laying them out as two grid rows (with a gap) meant the
+   open state rotated them in place while still 6px apart — which drew
+   two offset strokes rather than a converging X. */
 .nav__burger span {
-  display: block;
+  grid-area: 1 / 1;
   width: 16px;
   height: 1.5px;
   background: var(--fg);
-  transition: transform 0.45s var(--ease), opacity 0.3s var(--ease);
+  transition: transform 0.45s var(--ease);
 }
 
 .nav__burger span:first-child { transform: translateY(-3px); }
 .nav__burger span:last-child  { transform: translateY(3px); }
 
-.nav__burger[aria-expanded="true"] span:first-child { transform: translateY(0.75px) rotate(45deg); }
-.nav__burger[aria-expanded="true"] span:last-child  { transform: translateY(-0.75px) rotate(-45deg); }
+.nav__burger[aria-expanded="true"] span:first-child { transform: rotate(45deg); }
+.nav__burger[aria-expanded="true"] span:last-child  { transform: rotate(-45deg); }
 
 /* ============================================================
    FULLSCREEN MENU
@@ -224,8 +239,16 @@
   z-index: 910;
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  padding: 120px var(--gutter) 48px;
+  /* NOT `center`: once the links overflow the viewport, centred flex
+     content is clipped at BOTH ends and the top becomes unreachable —
+     which is what hid "01 Home" behind the bar. flex-start plus the
+     auto margins below centres while there is room, and scrolls when
+     there isn't. */
+  justify-content: flex-start;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  -webkit-overflow-scrolling: touch;
+  padding: 104px var(--gutter) 40px;
   background: var(--bg);
   clip-path: circle(0% at calc(100% - 44px) 44px);
   transition: clip-path 0.8s var(--ease);
@@ -253,10 +276,14 @@
   background: var(--line-soft);
 }
 
+/* auto margins collapse to 0 when the content overflows, so the block
+   is centred on tall screens and scrollable on short ones */
 .menu__links {
   position: relative;
   display: grid;
   gap: 2px;
+  margin-top: auto;
+  flex-shrink: 0;
 }
 
 .menu__links a {
@@ -303,7 +330,9 @@
   display: flex;
   flex-wrap: wrap;
   gap: 10px 28px;
-  margin-top: 48px;
+  margin-top: 40px;
+  margin-bottom: auto;
+  flex-shrink: 0;
   font-family: var(--mono);
   font-size: 0.72rem;
   letter-spacing: 0.1em;
@@ -326,6 +355,15 @@
 @media (max-width: 560px) {
   .nav__cta { display: none; }
   .nav__wordmark em { display: none; }
+
+  /* the CTA carried the margin-left:auto that pushed the right-hand
+     group over; with it hidden, the cluster claims that job itself */
+  .nav__tools { margin-left: auto; }
+
+  /* tighter rows so all seven links clear a phone viewport */
+  .menu { padding-top: 92px; }
+  .menu__links a { padding: 11px 0; font-size: clamp(1.65rem, 7.6vw, 2.4rem); }
+  .menu__foot { margin-top: 28px; }
 }
 
 @media (prefers-reduced-motion: reduce) {
