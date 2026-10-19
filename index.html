@@ -3,623 +3,467 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Ajal Architects — an architecture and interior design practice building quiet, precise, climate-aware spaces across India.">
-  <meta name="theme-color" content="#08080b">
-
-  <title>Ajal Architects — Architecture &amp; Interior Design</title>
+  <title>Ajal Architects — Architecture &amp; Interior Design, Bengaluru</title>
+  <meta name="description" content="Ajal Architects is an architecture and interior design studio in Bengaluru designing climate-aware homes, workplaces and hospitality projects across South India.">
+  <meta name="theme-color" content="#0b0b0c">
+  <meta property="og:title" content="Ajal Architects">
+  <meta property="og:description" content="Architecture & interior design — Bengaluru, India.">
+  <meta property="og:image" content="slider1.jpg">
 
   <link rel="icon" type="image/png" href="AJ_Favico.png">
-
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter+Tight:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
 
-  <link rel="stylesheet" href="home.css">
-  <link rel="stylesheet" href="nav.css">
-  <link rel="stylesheet" href="product.css">
-  <link rel="stylesheet" href="footer.css">
-
-  <!-- Applied before first paint so a saved light preference doesn't
-       flash the default dark surface. -->
-  <script>
-    try {
-      var t = localStorage.getItem('ajal-theme');
-      if (t === 'light' || t === 'dark') document.documentElement.setAttribute('data-theme', t);
-    } catch (e) {}
+  <script type="importmap">
+    {
+      "imports": {
+        "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js",
+        "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"
+      }
+    }
   </script>
 </head>
 
-<body>
+<body class="is-loading">
 
-<!-- ============ PRELOADER ============ -->
-<div class="preloader" id="preloader" aria-hidden="true">
-  <div class="preloader__inner">
-    <div class="preloader__mark">
-      <img src="AJ_MAIN_LOGO.png" alt="" class="preloader__logo">
+<!-- ================= PRELOADER ================= -->
+<div class="loader" id="loader" aria-hidden="true">
+  <div class="loader__frame">
+    <svg class="loader__draw" viewBox="0 0 120 100">
+      <path d="M10 90 L60 10 L110 90 Z" />
+      <path d="M30 90 L60 42 L90 90" />
+      <path d="M0 90 H120" />
+    </svg>
+    <div class="loader__row">
+      <span>Ajal Architects</span>
+      <span class="loader__count"><b id="loaderCount">000</b>%</span>
     </div>
-    <div class="preloader__meta">
-      <span class="preloader__label">Ajal Architects</span>
-      <span class="preloader__count" id="preloaderCount">00</span>
-    </div>
-    <div class="preloader__bar"><span id="preloaderBar"></span></div>
+    <div class="loader__bar"><i id="loaderBar"></i></div>
+    <p class="loader__note">Drawing the site&hellip;</p>
   </div>
-  <div class="preloader__curtain"></div>
 </div>
 
-<!-- ============ ATMOSPHERE ============ -->
-<div class="grain" aria-hidden="true"></div>
-<div class="scroll-progress" aria-hidden="true"><span id="scrollProgress"></span></div>
+<!-- ================= CURSOR ================= -->
+<div class="cursor" id="cursor" aria-hidden="true">
+  <span class="cursor__dot"></span>
+  <span class="cursor__ring"><em id="cursorLabel"></em></span>
+</div>
 
-<!-- ============ NAV ============ -->
+<div class="grain" aria-hidden="true"></div>
+
+<!-- ================= NAV ================= -->
 <header class="nav" id="nav">
-  <a href="#hero" class="nav__brand" data-scroll aria-label="Ajal Architects — home">
-    <img src="AJ_MAIN_LOGO.png" alt="" class="nav__logo">
-    <span class="nav__wordmark">
-      <strong>AJAL</strong>
-      <em>Architects</em>
-    </span>
+  <a href="#top" class="nav__brand" aria-label="Ajal Architects — home">
+    <img src="logo.png" alt="" width="40" height="40">
+    <span><strong>Ajal</strong> Architects</span>
   </a>
 
   <nav class="nav__links" aria-label="Primary">
-    <a href="#projects"  data-scroll data-nav>Projects</a>
-    <a href="#manifesto" data-scroll data-nav>Manifesto</a>
-    <a href="#story"     data-scroll data-nav>Our Story</a>
-    <a href="#team"      data-scroll data-nav>Team</a>
-    <a href="#awards"    data-scroll data-nav>Awards</a>
+    <a href="#work">Work</a>
+    <a href="#studio">Studio</a>
+    <a href="#process">Process</a>
+    <a href="#people">People</a>
+    <a href="#contact">Contact</a>
   </nav>
 
-  <a href="#contact" class="nav__cta" data-scroll data-magnetic>
-    <span>Start a project</span>
-    <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 13L13 3M13 3H5.5M13 3v7.5"/></svg>
-  </a>
-
-  <div class="nav__tools">
-    <button class="nav__theme" data-theme-toggle aria-label="Switch to dark theme">
-      <svg class="i-moon" viewBox="0 0 16 16" aria-hidden="true">
-        <path d="M13.5 9.6A5.8 5.8 0 0 1 6.4 2.5a5.8 5.8 0 1 0 7.1 7.1Z"/>
-      </svg>
-      <svg class="i-sun" viewBox="0 0 16 16" aria-hidden="true">
-        <circle cx="8" cy="8" r="3.1"/>
-        <path d="M8 1v1.6M8 13.4V15M15 8h-1.6M2.6 8H1M12.9 3.1l-1.1 1.1M4.2 11.8l-1.1 1.1M12.9 12.9l-1.1-1.1M4.2 4.2 3.1 3.1"/>
-      </svg>
-    </button>
-
-    <button class="nav__burger" id="navBurger" aria-expanded="false" aria-controls="navMenu" aria-label="Open menu">
-      <span></span><span></span>
+  <div class="nav__right">
+    <span class="nav__clock" id="clock" aria-label="Local time in Bengaluru">BLR --:--</span>
+    <button class="nav__menu" id="menuBtn" aria-expanded="false" aria-controls="menu">
+      <span class="nav__menu-label">Menu</span>
+      <span class="nav__menu-icon"><i></i><i></i></span>
     </button>
   </div>
 </header>
 
-<!-- ============ MOBILE MENU ============ -->
-<div class="menu" id="navMenu" inert>
-  <div class="menu__grid" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
-  <nav class="menu__links" aria-label="Mobile">
-    <a href="#hero"      data-scroll data-menu-link><i>01</i>Home</a>
-    <a href="#projects"  data-scroll data-menu-link><i>02</i>Projects</a>
-    <a href="#manifesto" data-scroll data-menu-link><i>03</i>Manifesto</a>
-    <a href="#story"     data-scroll data-menu-link><i>04</i>Our Story</a>
-    <a href="#team"      data-scroll data-menu-link><i>05</i>Team</a>
-    <a href="#awards"    data-scroll data-menu-link><i>06</i>Awards</a>
-    <a href="#contact"   data-scroll data-menu-link><i>07</i>Contact</a>
-  </nav>
-  <div class="menu__foot">
-    <a href="mailto:studio@ajalarchitects.com">studio@ajalarchitects.com</a>
-    <a href="tel:+919000000000">+91 90000 00000</a>
+<div class="menu" id="menu" inert>
+  <div class="menu__bg" aria-hidden="true"></div>
+  <div class="menu__inner">
+    <nav class="menu__links" aria-label="Menu">
+      <a href="#top"><i>01</i><span>Home</span></a>
+      <a href="#work"><i>02</i><span>Work</span></a>
+      <a href="#studio"><i>03</i><span>Studio</span></a>
+      <a href="#process"><i>04</i><span>Process</span></a>
+      <a href="#people"><i>05</i><span>People</span></a>
+      <a href="#contact"><i>06</i><span>Contact</span></a>
+    </nav>
+    <div class="menu__side">
+      <div>
+        <p class="mono">Studio</p>
+        <p>Jayanagar 3rd Block<br>Bengaluru 560011</p>
+      </div>
+      <div>
+        <p class="mono">New projects</p>
+        <p><a href="mailto:studio@ajalarchitects.com">studio@ajalarchitects.com</a><br><a href="tel:+919000000000">+91 90000 00000</a></p>
+      </div>
+      <div>
+        <p class="mono">Follow</p>
+        <p><a href="#" data-social="instagram">Instagram</a> &middot; <a href="#" data-social="linkedin">LinkedIn</a> &middot; <a href="#" data-social="behance">Behance</a></p>
+      </div>
+    </div>
   </div>
 </div>
 
-<main id="main">
+<main id="top">
 
-  <!-- ============ HERO ============ -->
+  <!-- ================= HERO (pinned 3D) ================= -->
   <section class="hero" id="hero">
-    <canvas class="hero__canvas" id="heroCanvas" aria-hidden="true"></canvas>
+    <div class="hero__sticky">
+      <canvas class="hero__canvas" id="heroCanvas" aria-hidden="true"></canvas>
+      <img class="hero__fallback" src="slider1.jpg" alt="" aria-hidden="true">
+      <div class="hero__vignette" aria-hidden="true"></div>
 
-    <div class="hero__media" data-parallax="0.12">
-      <img src="slider1.jpg" alt="Ajal Architects — completed residential project" class="hero__img">
-      <div class="hero__scrim"></div>
-    </div>
+      <!-- Floor labels that track the exploded model -->
+      <div class="hero__labels" id="heroLabels" aria-hidden="true"></div>
 
-    <div class="hero__body">
-      <p class="hero__eyebrow reveal">
-        <span class="pulse"></span>
-        Architecture &middot; Interiors &middot; Since 2014
-      </p>
-
-      <h1 class="hero__title" data-split>
-        Building light<br>into structure
-      </h1>
-
-      <p class="hero__lede reveal" data-delay="200">
-        We design climate-aware homes, workplaces and public spaces —
-        drawn with restraint, detailed to the millimetre, built to age well.
-      </p>
-
-      <div class="hero__actions reveal" data-delay="320">
-        <a href="#projects" class="btn btn--solid" data-scroll data-magnetic>
-          <span>View our work</span>
-          <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 13L13 3M13 3H5.5M13 3v7.5"/></svg>
-        </a>
-        <a href="#story" class="btn btn--ghost" data-scroll data-magnetic>
-          <span>The practice</span>
-        </a>
+      <div class="hero__frame" aria-hidden="true">
+        <span class="mono">N 12°58′ E 77°35′</span>
+        <span class="mono" id="heroScale">Scale 1:100</span>
       </div>
-    </div>
 
-    <div class="hero__foot">
-      <aside class="hero__rail" aria-hidden="true">
-        <span class="hero__rail-line"></span>
-        <span class="hero__rail-text">Scroll to explore</span>
-      </aside>
+      <div class="hero__stage is-active" data-stage="0">
+        <p class="eyebrow"><span class="dot"></span>Architecture &middot; Interiors &middot; Since 2014</p>
+        <h1 class="hero__title">
+          <span class="line"><span>Building light</span></span>
+          <span class="line"><span><em>into</em> structure</span></span>
+        </h1>
+        <p class="hero__lede">A Bengaluru studio designing homes, workplaces and retreats that are drawn with restraint and built to age well.</p>
+        <div class="hero__actions">
+          <a href="#work" class="btn btn--gold" data-magnetic><span>See the work</span><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 13L13 3M13 3H5.5M13 3v7.5"/></svg></a>
+          <a href="#contact" class="btn btn--line" data-magnetic><span>Start a project</span></a>
+        </div>
+      </div>
 
-      <div class="hero__stats">
-        <div class="hero__stat reveal" data-delay="400">
-          <b data-count="120" data-suffix="+">0</b>
-          <span>Projects delivered</span>
-        </div>
-        <div class="hero__stat reveal" data-delay="480">
-          <b data-count="11" data-suffix=" yrs">0</b>
-          <span>In practice</span>
-        </div>
-        <div class="hero__stat reveal" data-delay="560">
-          <b data-count="9" data-suffix="">0</b>
-          <span>Design awards</span>
-        </div>
+      <div class="hero__stage" data-stage="1">
+        <p class="eyebrow">01 &mdash; Climate first</p>
+        <h2 class="hero__title hero__title--md">Designed around<br><em>sun, shade</em> and air.</h2>
+        <p class="hero__lede">Orientation, overhangs and cross-ventilation are settled before a single elevation is drawn.</p>
+      </div>
+
+      <div class="hero__stage" data-stage="2">
+        <p class="eyebrow">02 &mdash; Every layer resolved</p>
+        <h2 class="hero__title hero__title--md">From plinth<br>to <em>parapet.</em></h2>
+        <p class="hero__lede">Structure, services and finish are drawn together, floor by floor, so nothing is solved on site.</p>
+      </div>
+
+      <div class="hero__hud">
+        <div class="hero__progress"><i id="heroBar"></i></div>
+        <span class="mono" id="heroStep">01 / 03</span>
+        <span class="mono hero__scroll">Scroll</span>
       </div>
     </div>
   </section>
 
-  <!-- ============ MARQUEE ============ -->
+  <!-- ================= MARQUEE ================= -->
   <div class="marquee" aria-hidden="true">
-    <div class="marquee__track">
-      <span>Residential</span><i>◆</i>
-      <span>Workplace</span><i>◆</i>
-      <span>Hospitality</span><i>◆</i>
-      <span>Adaptive Reuse</span><i>◆</i>
-      <span>Interiors</span><i>◆</i>
-      <span>Master Planning</span><i>◆</i>
-      <span>Residential</span><i>◆</i>
-      <span>Workplace</span><i>◆</i>
-      <span>Hospitality</span><i>◆</i>
-      <span>Adaptive Reuse</span><i>◆</i>
-      <span>Interiors</span><i>◆</i>
-      <span>Master Planning</span><i>◆</i>
+    <div class="marquee__track" id="marquee">
+      <span>Residential</span><i>&#9670;</i><span>Workplace</span><i>&#9670;</i><span>Hospitality</span><i>&#9670;</i><span>Interiors</span><i>&#9670;</i><span>Landscape</span><i>&#9670;</i><span>3D Visualisation</span><i>&#9670;</i>
     </div>
   </div>
 
-  <!-- ============ STATEMENT ============ -->
-  <section class="statement" id="statement">
+  <!-- ================= STATEMENT ================= -->
+  <section class="statement" id="studio">
     <div class="shell">
-      <p class="kicker reveal">/ 01 — The Practice</p>
-      <h2 class="statement__text" data-split>
-        Every site already knows what it wants to become.
-        Our work is to listen carefully, then draw the least
-        that says the most.
-      </h2>
-      <div class="statement__foot reveal" data-delay="200">
-        <img src="AA_mainlogo.jpg" alt="" class="statement__seal">
+      <p class="kicker" data-reveal>( The studio )</p>
+      <p class="statement__text" data-words>
+        Every site already knows what it wants to become. Our work is to listen carefully,
+        then draw the least that says the most &mdash; buildings that stay cool without
+        machines, read clearly in plan, and look better in their twentieth year than their first.
+      </p>
+      <div class="statement__foot">
+        <div class="stat" data-reveal><b data-count="120">0</b><sup>+</sup><span>Projects delivered</span></div>
+        <div class="stat" data-reveal><b data-count="11">0</b><sup>yrs</sup><span>In practice</span></div>
+        <div class="stat" data-reveal><b data-count="14">0</b><span>Architects &amp; designers</span></div>
+        <div class="stat" data-reveal><b data-count="9">0</b><span>Design awards</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= SERVICES ================= -->
+  <section class="services section" id="services">
+    <div class="shell">
+      <header class="head">
+        <p class="kicker" data-reveal>( Services )</p>
+        <h2 class="title" data-split>What we <em>design</em></h2>
+      </header>
+
+      <div class="services__grid">
+        <article class="svc" data-tilt>
+          <span class="svc__no mono">01</span>
+          <svg class="svc__icon" viewBox="0 0 48 48" aria-hidden="true"><path d="M6 42V20L24 6l18 14v22H6Z"/><path d="M18 42V28h12v14"/></svg>
+          <h3>Architecture</h3>
+          <p>Houses, villas, apartments and workplaces — from site study and massing to working drawings and approvals.</p>
+        </article>
+        <article class="svc" data-tilt>
+          <span class="svc__no mono">02</span>
+          <svg class="svc__icon" viewBox="0 0 48 48" aria-hidden="true"><path d="M6 40h36M10 40V22h28v18"/><path d="M16 30h16M24 22v18"/></svg>
+          <h3>Interior design</h3>
+          <p>Joinery, lighting, furniture and material palettes drawn at 1:1 and built by craftspeople we have worked with for years.</p>
+        </article>
+        <article class="svc" data-tilt>
+          <span class="svc__no mono">03</span>
+          <svg class="svc__icon" viewBox="0 0 48 48" aria-hidden="true"><path d="M24 42V18M24 18c-8 0-12-6-12-12 6 0 12 4 12 12Zm0 0c8 0 12-6 12-12-6 0-12 4-12 12Z"/><path d="M8 42h32"/></svg>
+          <h3>Landscape</h3>
+          <p>Courtyards, terraces and gardens planned with the building — shade trees, water and planting that does real cooling work.</p>
+        </article>
+        <article class="svc" data-tilt>
+          <span class="svc__no mono">04</span>
+          <svg class="svc__icon" viewBox="0 0 48 48" aria-hidden="true"><path d="M24 6 42 16v16L24 42 6 32V16L24 6Z"/><path d="M6 16l18 10 18-10M24 26v16"/></svg>
+          <h3>3D visualisation</h3>
+          <p>Photoreal renders and walkthroughs so you can stand in the space and make decisions before anything is built.</p>
+        </article>
+        <article class="svc" data-tilt>
+          <span class="svc__no mono">05</span>
+          <svg class="svc__icon" viewBox="0 0 48 48" aria-hidden="true"><rect x="6" y="6" width="36" height="36"/><path d="M6 18h36M18 18v24M30 6v12"/></svg>
+          <h3>Master planning</h3>
+          <p>Layouts for plotted developments, campuses and resorts — roads, open space and building envelopes that hold together.</p>
+        </article>
+        <article class="svc" data-tilt>
+          <span class="svc__no mono">06</span>
+          <svg class="svc__icon" viewBox="0 0 48 48" aria-hidden="true"><path d="M8 40 30 18M26 14l8 8M30 10l8 8-4 4-8-8 4-4Z"/><path d="M8 40l4-10 6 6-10 4Z"/></svg>
+          <h3>Turnkey delivery</h3>
+          <p>Site supervision, contractor coordination and handover — one team from first sketch to keys in hand.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= FEATURED WORK (pinned horizontal 3D gallery) ================= -->
+  <section class="work" id="work">
+    <div class="work__sticky">
+      <header class="work__head shell">
         <div>
-          <strong>Ajal Architects</strong>
-          <span>Studio practice — Bengaluru, India</span>
+          <p class="kicker">( Selected work )</p>
+          <h2 class="title">Featured <em>projects</em></h2>
+        </div>
+        <p class="work__count mono"><span id="workIndex">01</span> / <span id="workTotal">05</span></p>
+      </header>
+      <div class="work__track" id="workTrack"><!-- built from projects.js --></div>
+      <div class="work__progress shell"><i id="workBar"></i></div>
+    </div>
+  </section>
+
+  <!-- ================= PROJECT INDEX ================= -->
+  <section class="index section" id="index">
+    <div class="shell">
+      <header class="head head--row">
+        <div>
+          <p class="kicker" data-reveal>( Index )</p>
+          <h2 class="title" data-split>All <em>projects</em></h2>
+        </div>
+        <div class="filters" id="filters" role="tablist" aria-label="Filter projects"></div>
+      </header>
+
+      <div class="index__table" role="table" aria-label="Projects">
+        <div class="index__row index__row--head mono" role="row">
+          <span role="columnheader">No.</span>
+          <span role="columnheader">Project</span>
+          <span role="columnheader">Type</span>
+          <span role="columnheader">Location</span>
+          <span role="columnheader">Year</span>
+        </div>
+        <div id="indexBody"></div>
+      </div>
+    </div>
+    <div class="float-preview" id="floatPreview" aria-hidden="true"><img alt=""></div>
+  </section>
+
+  <!-- ================= PROCESS (3D cube) ================= -->
+  <section class="process" id="process">
+    <div class="process__sticky">
+      <div class="shell process__grid">
+        <div class="process__scene" aria-hidden="true">
+          <div class="cube" id="cube">
+            <div class="cube__face cube__face--front"><b>01</b><span>Listen</span></div>
+            <div class="cube__face cube__face--right"><b>02</b><span>Concept</span></div>
+            <div class="cube__face cube__face--back"><b>03</b><span>Develop</span></div>
+            <div class="cube__face cube__face--left"><b>04</b><span>Build</span></div>
+            <div class="cube__face cube__face--top"></div>
+            <div class="cube__face cube__face--bottom"></div>
+          </div>
+          <div class="cube__shadow"></div>
+        </div>
+
+        <div class="process__copy">
+          <p class="kicker">( Process )</p>
+          <h2 class="title">How a project <em>moves</em></h2>
+          <ol class="steps" id="steps">
+            <li class="step is-active">
+              <span class="mono">01 &mdash; 2&ndash;3 weeks</span>
+              <h3>Listen</h3>
+              <p>Site visit, survey and a long conversation about how you live or work. We study sun, wind, views and the bylaws before we draw.</p>
+            </li>
+            <li class="step">
+              <span class="mono">02 &mdash; 4&ndash;6 weeks</span>
+              <h3>Concept</h3>
+              <p>Plans, massing models and a first set of 3D views. Two or three clear options, each with an honest cost range.</p>
+            </li>
+            <li class="step">
+              <span class="mono">03 &mdash; 8&ndash;12 weeks</span>
+              <h3>Develop</h3>
+              <p>Structure, services, materials and every junction resolved. Approval drawings, tender set and photoreal renders.</p>
+            </li>
+            <li class="step">
+              <span class="mono">04 &mdash; on site</span>
+              <h3>Build</h3>
+              <p>Weekly site visits, contractor coordination and a snag list we close before handover. Whoever drew it, sees it built.</p>
+            </li>
+          </ol>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- ============ PROJECTS ============ -->
-  <section class="section projects" id="projects">
+  <!-- ================= MANIFESTO ================= -->
+  <section class="manifesto section" id="manifesto">
     <div class="shell">
-      <header class="section__head">
-        <p class="kicker reveal">/ 02 — Selected Work</p>
-        <h2 class="section__title" data-split>Projects</h2>
-        <p class="section__lede reveal" data-delay="140">
-          A cross-section of the studio — houses, workplaces and retreats
-          completed between 2016 and 2025.
-        </p>
+      <header class="head">
+        <p class="kicker" data-reveal>( Principles )</p>
+        <h2 class="title" data-split>Five things we <em>won't</em> compromise</h2>
       </header>
-
-      <div class="filters reveal" role="tablist" aria-label="Filter projects">
-        <button class="filter is-active" data-filter="all"          role="tab" aria-selected="true">All</button>
-        <button class="filter" data-filter="residential"  role="tab" aria-selected="false">Residential</button>
-        <button class="filter" data-filter="workplace"    role="tab" aria-selected="false">Workplace</button>
-        <button class="filter" data-filter="hospitality"  role="tab" aria-selected="false">Hospitality</button>
-        <button class="filter" data-filter="interiors"    role="tab" aria-selected="false">Interiors</button>
-      </div>
-
-      <div class="grid" id="projectGrid">
-
-        <article class="card card--wide" data-cat="residential" data-tilt>
-          <div class="card__media">
-            <img src="slider1.jpg" alt="Shreyas Retreat — courtyard elevation at dusk" loading="lazy">
-          </div>
-          <div class="card__meta">
-            <span class="card__index">01</span>
-            <div>
-              <h3>Shreyas Retreat</h3>
-              <p>Residential &middot; Nandi Hills &middot; 2024</p>
-            </div>
-            <span class="card__arrow" aria-hidden="true">
-              <svg viewBox="0 0 16 16"><path d="M3 13L13 3M13 3H5.5M13 3v7.5"/></svg>
-            </span>
-          </div>
-        </article>
-
-        <article class="card" data-cat="workplace" data-tilt>
-          <div class="card__media">
-            <img src="slider2.jpg" alt="The Convent Works — brick and glass facade" loading="lazy">
-          </div>
-          <div class="card__meta">
-            <span class="card__index">02</span>
-            <div>
-              <h3>The Convent Works</h3>
-              <p>Workplace &middot; Bengaluru &middot; 2023</p>
-            </div>
-            <span class="card__arrow" aria-hidden="true">
-              <svg viewBox="0 0 16 16"><path d="M3 13L13 3M13 3H5.5M13 3v7.5"/></svg>
-            </span>
-          </div>
-        </article>
-
-        <article class="card" data-cat="hospitality" data-tilt>
-          <div class="card__media">
-            <img src="carousel_1.jpg" alt="Kavya House — stepped terraces" loading="lazy">
-          </div>
-          <div class="card__meta">
-            <span class="card__index">03</span>
-            <div>
-              <h3>Kavya House</h3>
-              <p>Hospitality &middot; Coorg &middot; 2023</p>
-            </div>
-            <span class="card__arrow" aria-hidden="true">
-              <svg viewBox="0 0 16 16"><path d="M3 13L13 3M13 3H5.5M13 3v7.5"/></svg>
-            </span>
-          </div>
-        </article>
-
-        <article class="card" data-cat="residential" data-tilt>
-          <div class="card__media">
-            <img src="carousel_2.jpg" alt="Verandah House — shaded double-height verandah" loading="lazy">
-          </div>
-          <div class="card__meta">
-            <span class="card__index">04</span>
-            <div>
-              <h3>Verandah House</h3>
-              <p>Residential &middot; Mysuru &middot; 2022</p>
-            </div>
-            <span class="card__arrow" aria-hidden="true">
-              <svg viewBox="0 0 16 16"><path d="M3 13L13 3M13 3H5.5M13 3v7.5"/></svg>
-            </span>
-          </div>
-        </article>
-
-        <article class="card card--wide" data-cat="interiors" data-tilt>
-          <div class="card__media">
-            <img src="carousel_3.jpg" alt="Studio Ninteen — interior with exposed services" loading="lazy">
-          </div>
-          <div class="card__meta">
-            <span class="card__index">05</span>
-            <div>
-              <h3>Studio Nineteen</h3>
-              <p>Interiors &middot; Bengaluru &middot; 2021</p>
-            </div>
-            <span class="card__arrow" aria-hidden="true">
-              <svg viewBox="0 0 16 16"><path d="M3 13L13 3M13 3H5.5M13 3v7.5"/></svg>
-            </span>
-          </div>
-        </article>
-
-        <!-- Drop-in slots: replace data-slot filename with your image and it renders automatically -->
-        <article class="card" data-cat="workplace" data-tilt>
-          <div class="card__media">
-            <img src="project-06.jpg" alt="Laterite Offices" loading="lazy">
-          </div>
-          <div class="card__meta">
-            <span class="card__index">06</span>
-            <div>
-              <h3>Laterite Offices</h3>
-              <p>Workplace &middot; Kochi &middot; 2025</p>
-            </div>
-            <span class="card__arrow" aria-hidden="true">
-              <svg viewBox="0 0 16 16"><path d="M3 13L13 3M13 3H5.5M13 3v7.5"/></svg>
-            </span>
-          </div>
-        </article>
-
-        <article class="card" data-cat="hospitality" data-tilt>
-          <div class="card__media">
-            <img src="project-07.jpg" alt="Backwater Pavilions" loading="lazy">
-          </div>
-          <div class="card__meta">
-            <span class="card__index">07</span>
-            <div>
-              <h3>Backwater Pavilions</h3>
-              <p>Hospitality &middot; Alleppey &middot; 2025</p>
-            </div>
-            <span class="card__arrow" aria-hidden="true">
-              <svg viewBox="0 0 16 16"><path d="M3 13L13 3M13 3H5.5M13 3v7.5"/></svg>
-            </span>
-          </div>
-        </article>
-
-        <article class="card" data-cat="interiors" data-tilt>
-          <div class="card__media">
-            <img src="project-08.jpg" alt="Ochre Apartment" loading="lazy">
-          </div>
-          <div class="card__meta">
-            <span class="card__index">08</span>
-            <div>
-              <h3>Ochre Apartment</h3>
-              <p>Interiors &middot; Hyderabad &middot; 2025</p>
-            </div>
-            <span class="card__arrow" aria-hidden="true">
-              <svg viewBox="0 0 16 16"><path d="M3 13L13 3M13 3H5.5M13 3v7.5"/></svg>
-            </span>
-          </div>
-        </article>
-
-      </div>
-
-      <p class="grid__empty" id="gridEmpty" hidden>No projects in this category yet.</p>
-    </div>
-  </section>
-
-  <!-- ============ MANIFESTO ============ -->
-  <section class="section manifesto" id="manifesto">
-    <div class="shell manifesto__shell">
-      <div class="manifesto__aside">
-        <p class="kicker reveal">/ 03 — Design Manifesto</p>
-        <h2 class="section__title" data-split>How we<br>draw</h2>
-        <p class="section__lede reveal" data-delay="140">
-          Five positions the studio returns to on every project,
-          from a 40&nbsp;sq&nbsp;m apartment to a campus.
-        </p>
-      </div>
-
       <ol class="principles">
-        <li class="principle reveal" data-delay="0">
-          <span class="principle__no">01</span>
-          <h3>Climate first, form second</h3>
-          <p>Orientation, shade and cross-ventilation are decided before a single elevation is drawn. Comfort should be structural, not mechanical.</p>
-        </li>
-        <li class="principle reveal" data-delay="90">
-          <span class="principle__no">02</span>
-          <h3>Material honesty</h3>
-          <p>Concrete reads as concrete, brick as brick. We do not clad one material to imitate another — surfaces are allowed to weather in public.</p>
-        </li>
-        <li class="principle reveal" data-delay="180">
-          <span class="principle__no">03</span>
-          <h3>The plan is the argument</h3>
-          <p>If it does not resolve in plan, no amount of rendering will save it. We test circulation, light and privacy in orthographic drawings first.</p>
-        </li>
-        <li class="principle reveal" data-delay="270">
-          <span class="principle__no">04</span>
-          <h3>Detail at 1:1</h3>
-          <p>Junctions, reveals and thresholds are drawn full size. The quality of a building is decided in the twenty millimetres nobody photographs.</p>
-        </li>
-        <li class="principle reveal" data-delay="360">
-          <span class="principle__no">05</span>
-          <h3>Build for the second owner</h3>
-          <p>Spaces are planned so they can change use without demolition. Longevity is the most effective form of sustainability we know.</p>
-        </li>
+        <li class="principle" data-flip><span class="mono">01</span><h3>Climate first, form second</h3><p>Comfort should come from the building, not the air-conditioner.</p></li>
+        <li class="principle" data-flip><span class="mono">02</span><h3>Material honesty</h3><p>Concrete reads as concrete, brick as brick, timber as timber. Nothing pretends.</p></li>
+        <li class="principle" data-flip><span class="mono">03</span><h3>The plan is the argument</h3><p>If it doesn't work in plan, no rendering will save it.</p></li>
+        <li class="principle" data-flip><span class="mono">04</span><h3>Detail at 1:1</h3><p>The quality of a building lives in the twenty millimetres nobody photographs.</p></li>
+        <li class="principle" data-flip><span class="mono">05</span><h3>Build for the second owner</h3><p>Spaces that can change use without demolition. Longevity is sustainability.</p></li>
       </ol>
     </div>
   </section>
 
-  <!-- ============ OUR STORY ============ -->
-  <section class="section story" id="story">
+  <!-- ================= STORY ================= -->
+  <section class="story section" id="story">
     <div class="shell">
-      <header class="section__head section__head--center">
-        <p class="kicker reveal">/ 04 — Our Story</p>
-        <h2 class="section__title" data-split>Eleven years, one obsession</h2>
+      <header class="head">
+        <p class="kicker" data-reveal>( Story )</p>
+        <h2 class="title" data-split>Eleven years, <em>one obsession</em></h2>
       </header>
-
       <div class="timeline" id="timeline">
         <span class="timeline__spine" aria-hidden="true"><i id="timelineFill"></i></span>
-
-        <div class="tl reveal">
-          <span class="tl__year">2014</span>
-          <div class="tl__body">
-            <h3>A table and two drawing boards</h3>
-            <p>Ajal Architects opens in a converted garage in Jayanagar with one commission — a 1,200&nbsp;sq&nbsp;ft house for a retired schoolteacher.</p>
-          </div>
-        </div>
-
-        <div class="tl reveal">
-          <span class="tl__year">2017</span>
-          <div class="tl__body">
-            <h3>First public building</h3>
-            <p>A community library in Tumakuru puts the studio's low-embodied-carbon detailing in front of a wider audience for the first time.</p>
-          </div>
-        </div>
-
-        <div class="tl reveal">
-          <span class="tl__year">2020</span>
-          <div class="tl__body">
-            <h3>The material library</h3>
-            <p>We start cataloguing every finish we specify — supplier, embodied carbon, ageing behaviour. It now runs to 400+ entries and drives every spec.</p>
-          </div>
-        </div>
-
-        <div class="tl reveal">
-          <span class="tl__year">2023</span>
-          <div class="tl__body">
-            <h3>Studio of fourteen</h3>
-            <p>The practice grows to fourteen architects across design, technical and site teams — still with one drawing review table at the centre of the room.</p>
-          </div>
-        </div>
-
-        <div class="tl reveal">
-          <span class="tl__year">2025</span>
-          <div class="tl__body">
-            <h3>Beyond the city</h3>
-            <p>Work extends into Kerala and coastal Karnataka, with three hospitality projects testing how the studio's language handles humidity and salt.</p>
-          </div>
-        </div>
+        <div class="tl" data-reveal><span class="tl__year">2014</span><div><h3>Two drawing boards</h3><p>The studio opens in a converted garage in Jayanagar with a single commission — a small house for a retired schoolteacher.</p></div></div>
+        <div class="tl" data-reveal><span class="tl__year">2017</span><div><h3>First public building</h3><p>A community library puts the studio's low-carbon detailing in front of a wider audience.</p></div></div>
+        <div class="tl" data-reveal><span class="tl__year">2020</span><div><h3>The material library</h3><p>Every finish we specify gets catalogued — supplier, embodied carbon, how it ages. It now runs to 400+ entries.</p></div></div>
+        <div class="tl" data-reveal><span class="tl__year">2023</span><div><h3>A studio of fourteen</h3><p>Design, technical and site teams — still around one drawing table.</p></div></div>
+        <div class="tl" data-reveal><span class="tl__year">2025</span><div><h3>Beyond the city</h3><p>Work extends into Kerala and coastal Karnataka, testing the studio's language against humidity and salt.</p></div></div>
       </div>
     </div>
   </section>
 
-  <!-- ============ TEAM ============ -->
-  <section class="section team" id="team">
+  <!-- ================= PEOPLE ================= -->
+  <section class="people section" id="people">
     <div class="shell">
-      <header class="section__head">
-        <p class="kicker reveal">/ 05 — Team</p>
-        <h2 class="section__title" data-split>The people who draw</h2>
-        <p class="section__lede reveal" data-delay="140">
-          Fourteen architects and designers. No separate &ldquo;design&rdquo; and
-          &ldquo;delivery&rdquo; teams — whoever draws it, sees it built.
-        </p>
+      <header class="head head--row">
+        <div>
+          <p class="kicker" data-reveal>( People )</p>
+          <h2 class="title" data-split>The people <em>who draw</em></h2>
+        </div>
+        <p class="lede" data-reveal>No separate design and delivery teams — whoever draws it, sees it built.</p>
       </header>
-
-      <div class="people">
-        <article class="person reveal" data-delay="0">
-          <div class="person__media"><img src="team-01.jpg" alt="Ajal Menon" loading="lazy"></div>
-          <h3>Ajal Menon</h3>
-          <p class="person__role">Founder &amp; Principal Architect</p>
-          <p class="person__bio">Twenty years across housing and public work. Runs the Thursday drawing review that everything passes through.</p>
-        </article>
-
-        <article class="person reveal" data-delay="90">
-          <div class="person__media"><img src="team-02.jpg" alt="Neha Raghavan" loading="lazy"></div>
-          <h3>Neha Raghavan</h3>
-          <p class="person__role">Associate — Design</p>
-          <p class="person__bio">Leads concept and massing. Believes a project is only resolved when the section explains itself without a caption.</p>
-        </article>
-
-        <article class="person reveal" data-delay="180">
-          <div class="person__media"><img src="team-03.jpg" alt="Imran Sheikh" loading="lazy"></div>
-          <h3>Imran Sheikh</h3>
-          <p class="person__role">Associate — Technical</p>
-          <p class="person__bio">Owns detailing and specification. Keeper of the material library and its 400-odd weathering notes.</p>
-        </article>
-
-        <article class="person reveal" data-delay="270">
-          <div class="person__media"><img src="team-04.jpg" alt="Divya Prakash" loading="lazy"></div>
-          <h3>Divya Prakash</h3>
-          <p class="person__role">Senior Architect — Interiors</p>
-          <p class="person__bio">Furniture, joinery and light. Draws every built-in piece the studio has ever installed.</p>
-        </article>
+      <div class="people__grid">
+        <article class="person" data-tilt data-reveal><div class="person__media"><img src="team-01.jpg" alt="Ajal Menon" loading="lazy"></div><h3>Ajal Menon</h3><p class="mono">Founder &amp; Principal</p></article>
+        <article class="person" data-tilt data-reveal><div class="person__media"><img src="team-02.jpg" alt="Neha Raghavan" loading="lazy"></div><h3>Neha Raghavan</h3><p class="mono">Associate — Design</p></article>
+        <article class="person" data-tilt data-reveal><div class="person__media"><img src="team-03.jpg" alt="Imran Sheikh" loading="lazy"></div><h3>Imran Sheikh</h3><p class="mono">Associate — Technical</p></article>
+        <article class="person" data-tilt data-reveal><div class="person__media"><img src="team-04.jpg" alt="Divya Prakash" loading="lazy"></div><h3>Divya Prakash</h3><p class="mono">Senior Architect — Interiors</p></article>
       </div>
     </div>
   </section>
 
-  <!-- ============ AWARDS ============ -->
-  <section class="section awards" id="awards">
+  <!-- ================= AWARDS ================= -->
+  <section class="awards section" id="awards">
     <div class="shell">
-      <header class="section__head">
-        <p class="kicker reveal">/ 06 — Recognition</p>
-        <h2 class="section__title" data-split>Awards &amp; press</h2>
+      <header class="head">
+        <p class="kicker" data-reveal>( Recognition )</p>
+        <h2 class="title" data-split>Awards &amp; <em>press</em></h2>
       </header>
-
-      <ul class="award-list" id="awardList">
-        <li class="award reveal" data-award-img="carousel_1.jpg">
-          <span class="award__year">2025</span>
-          <h3>IIA Award for Excellence — Residential</h3>
-          <span class="award__for">Shreyas Retreat</span>
-        </li>
-        <li class="award reveal" data-award-img="slider2.jpg">
-          <span class="award__year">2024</span>
-          <h3>Architecture+Design Emerging Practice</h3>
-          <span class="award__for">Studio-wide</span>
-        </li>
-        <li class="award reveal" data-award-img="carousel_2.jpg">
-          <span class="award__year">2023</span>
-          <h3>NDTV Design &amp; Architecture — Workplace</h3>
-          <span class="award__for">The Convent Works</span>
-        </li>
-        <li class="award reveal" data-award-img="carousel_3.jpg">
-          <span class="award__year">2022</span>
-          <h3>Kohler Bold Design Award — Shortlist</h3>
-          <span class="award__for">Verandah House</span>
-        </li>
-        <li class="award reveal" data-award-img="slider1.jpg">
-          <span class="award__year">2021</span>
-          <h3>FOAID Young Architect of the Year</h3>
-          <span class="award__for">Neha Raghavan</span>
-        </li>
+      <ul class="awards__list">
+        <li class="award" data-preview="slider1.jpg" data-reveal><span class="mono">2025</span><h3>IIA Award for Excellence — Residential</h3><span>The Arched Villa</span></li>
+        <li class="award" data-preview="carousel_2.jpg" data-reveal><span class="mono">2024</span><h3>Architecture+Design Emerging Practice</h3><span>Studio</span></li>
+        <li class="award" data-preview="slider2.jpg" data-reveal><span class="mono">2023</span><h3>NDTV Design &amp; Architecture — Workplace</h3><span>Convention Hall</span></li>
+        <li class="award" data-preview="carousel_3.jpg" data-reveal><span class="mono">2022</span><h3>Kohler Bold Design Award — Shortlist</h3><span>House 005</span></li>
+        <li class="award" data-preview="carousel_1.jpg" data-reveal><span class="mono">2021</span><h3>FOAID Young Architect of the Year</h3><span>Neha Raghavan</span></li>
       </ul>
-
-      <div class="award-preview" id="awardPreview" aria-hidden="true"><img src="" alt=""></div>
     </div>
   </section>
 
-  <!-- ============ CONTACT ============ -->
-  <section class="section contact" id="contact">
-    <div class="shell contact__shell">
-      <div class="contact__intro">
-        <p class="kicker reveal">/ 07 — Contact</p>
-        <h2 class="section__title" data-split>Start a project</h2>
-        <p class="section__lede reveal" data-delay="140">
-          Tell us about the site, the budget range and when you would like to
-          begin. We reply to every enquiry within two working days.
-        </p>
-
-        <div class="contact__details reveal" data-delay="220">
-          <div>
-            <span>Studio</span>
-            <p>14, 4th Cross, Jayanagar 3rd Block<br>Bengaluru 560011, India</p>
-          </div>
-          <div>
-            <span>Email</span>
-            <p><a href="mailto:studio@ajalarchitects.com">studio@ajalarchitects.com</a></p>
-          </div>
-          <div>
-            <span>Phone</span>
-            <p><a href="tel:+919000000000">+91 90000 00000</a></p>
-          </div>
-        </div>
+  <!-- ================= CONTACT ================= -->
+  <section class="contact section" id="contact">
+    <div class="shell contact__grid">
+      <div>
+        <p class="kicker" data-reveal>( Contact )</p>
+        <h2 class="title title--xl" data-split>Let's build <em>something quiet.</em></h2>
+        <p class="lede" data-reveal>Tell us about the site, the rough budget and when you'd like to start. We reply to every enquiry within two working days.</p>
+        <dl class="contact__details" data-reveal>
+          <div><dt class="mono">Studio</dt><dd>14, 4th Cross, Jayanagar 3rd Block<br>Bengaluru 560011, India</dd></div>
+          <div><dt class="mono">Email</dt><dd><a href="mailto:studio@ajalarchitects.com">studio@ajalarchitects.com</a></dd></div>
+          <div><dt class="mono">Phone</dt><dd><a href="tel:+919000000000">+91 90000 00000</a></dd></div>
+        </dl>
       </div>
 
-      <form class="form reveal" data-delay="200" id="contactForm" novalidate>
-        <div class="field">
-          <input type="text" id="fName" name="name" placeholder=" " autocomplete="name" required>
-          <label for="fName">Your name</label>
-          <small class="field__err" data-err></small>
-        </div>
-
-        <div class="field">
-          <input type="email" id="fEmail" name="email" placeholder=" " autocomplete="email" required>
-          <label for="fEmail">Email address</label>
-          <small class="field__err" data-err></small>
-        </div>
-
-        <div class="field">
-          <select id="fType" name="type" required>
-            <option value="">Select a project type</option>
-            <option>Residential</option>
-            <option>Workplace</option>
-            <option>Hospitality</option>
-            <option>Interiors</option>
-            <option>Other</option>
-          </select>
-          <label for="fType" class="label--static">Project type</label>
-          <small class="field__err" data-err></small>
-        </div>
-
-        <div class="field">
-          <textarea id="fMsg" name="message" rows="4" placeholder=" " required></textarea>
-          <label for="fMsg">Tell us about the project</label>
-          <small class="field__err" data-err></small>
-        </div>
-
-        <button type="submit" class="btn btn--solid btn--full" data-magnetic>
-          <span>Send enquiry</span>
-          <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 13L13 3M13 3H5.5M13 3v7.5"/></svg>
-        </button>
-
+      <form class="form" id="contactForm" novalidate data-reveal>
+        <div class="field"><input id="fName" name="name" placeholder=" " autocomplete="name" required><label for="fName">Your name</label><small></small></div>
+        <div class="field"><input id="fEmail" name="email" type="email" placeholder=" " autocomplete="email" required><label for="fEmail">Email</label><small></small></div>
+        <div class="field"><input id="fPhone" name="phone" type="tel" placeholder=" " autocomplete="tel"><label for="fPhone">Phone (optional)</label><small></small></div>
+        <fieldset class="chips" aria-label="Project type">
+          <legend class="mono">Project type</legend>
+          <label><input type="radio" name="type" value="Residential" checked><span>Residential</span></label>
+          <label><input type="radio" name="type" value="Workplace"><span>Workplace</span></label>
+          <label><input type="radio" name="type" value="Hospitality"><span>Hospitality</span></label>
+          <label><input type="radio" name="type" value="Interiors"><span>Interiors</span></label>
+          <label><input type="radio" name="type" value="Other"><span>Other</span></label>
+        </fieldset>
+        <div class="field"><textarea id="fMsg" name="message" rows="4" placeholder=" " required></textarea><label for="fMsg">About the project</label><small></small></div>
+        <button type="submit" class="btn btn--gold btn--full" data-magnetic><span>Send enquiry</span><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 13L13 3M13 3H5.5M13 3v7.5"/></svg></button>
         <p class="form__status" id="formStatus" role="status" aria-live="polite"></p>
       </form>
     </div>
   </section>
-
 </main>
 
-<footer class="footer" id="footer"></footer>
+<!-- ================= FOOTER ================= -->
+<footer class="footer">
+  <div class="shell">
+    <div class="footer__top">
+      <p class="footer__cta">Have a site in mind?<br><a href="#contact" class="link-gold">Start a conversation &rarr;</a></p>
+      <div class="footer__cols">
+        <div><p class="mono">Explore</p><a href="#work">Work</a><a href="#studio">Studio</a><a href="#process">Process</a><a href="#people">People</a></div>
+        <div><p class="mono">Follow</p><a href="#" data-social="instagram">Instagram</a><a href="#" data-social="linkedin">LinkedIn</a><a href="#" data-social="behance">Behance</a></div>
+        <div><p class="mono">Visit</p><span>Jayanagar 3rd Block</span><span>Bengaluru 560011</span></div>
+      </div>
+    </div>
+    <div class="footer__mark" aria-hidden="true" id="footerMark"><span>A</span><span>J</span><span>A</span><span>L</span></div>
+    <div class="footer__bottom mono">
+      <span>&copy; <span id="year">2026</span> Ajal Architects</span>
+      <button class="to-top" id="toTop">Back to top &uarr;</button>
+    </div>
+  </div>
+</footer>
 
-<button class="to-top" id="toTop" aria-label="Back to top" data-magnetic>
-  <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 13V3M8 3L3.5 7.5M8 3l4.5 4.5"/></svg>
-</button>
+<!-- ================= CASE STUDY OVERLAY ================= -->
+<div class="case" id="case" role="dialog" aria-modal="true" aria-labelledby="caseTitle" hidden>
+  <div class="case__scroll" id="caseScroll">
+    <button class="case__close" id="caseClose" aria-label="Close project"><span></span><span></span></button>
+    <div class="case__hero"><img id="caseCover" alt=""></div>
+    <div class="shell case__body">
+      <p class="kicker" id="caseKicker"></p>
+      <h2 class="title title--xl" id="caseTitle"></h2>
+      <dl class="case__meta" id="caseMeta"></dl>
+      <p class="case__summary" id="caseSummary"></p>
+      <div class="case__gallery" id="caseGallery"></div>
+      <div class="case__nav">
+        <button class="btn btn--line" id="casePrev"><span>&larr; Previous</span></button>
+        <button class="btn btn--line" id="caseNext"><span>Next project &rarr;</span></button>
+      </div>
+    </div>
+  </div>
+</div>
 
-<script src="script.js"></script>
-<script src="footer.js"></script>
+<!-- Libraries (pinned versions) -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="https://unpkg.com/lenis@1.1.13/dist/lenis.min.js"></script>
+
+<script src="projects.js"></script>
+<script type="module" src="main.js"></script>
 </body>
 </html>
