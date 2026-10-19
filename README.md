@@ -1,80 +1,72 @@
 # Ajal Architects — website
 
-A static site. No build step, no dependencies, no `package.json` — open it with any
-static file server and it runs.
+A static site with no build step. Three.js, GSAP and Lenis load from pinned CDN versions.
 
 ```bash
 python -m http.server 5500
 ```
 
-Then visit <http://localhost:5500>.
+Then open <http://localhost:5500>.
 
----
+## Adding your projects
 
-## Adding your images
+Edit **`projects.js`** only. Each project is one entry:
 
-The site is built so that **a missing image is never a broken image**. Any `<img>`
-that fails to load is replaced at runtime with a labelled blueprint plate showing
-the exact filename it wants. Drop a file with that name into the project root and
-it renders on the next reload — no markup changes needed.
+```js
+{
+  id: "lake-house",                 // unique, no spaces
+  title: "Lake House",
+  category: "residential",          // residential | workplace | hospitality | interiors | public
+  location: "Mysuru",
+  year: 2026,
+  status: "Completed",              // Completed | Under construction | Proposed | Concept
+  area: "5,200 sq ft",
+  client: "Private",                // optional
+  cover: "lake-house-1.jpg",        // main image, landscape
+  images: ["lake-house-2.jpg", "lake-house-3.jpg"],   // case-study gallery
+  summary: "Two to four sentences about the project.",
+  featured: true                    // true = also shown in the big 3D gallery
+}
+```
 
-These slots are currently waiting for files:
+Put the image files in the project folder. The filter buttons, index list, 3D gallery and
+case-study page all build themselves from this file. A missing image never shows as broken:
+it renders a blueprint placeholder with the filename it is waiting for.
 
-| Filename | Where it appears | Suggested crop |
-| --- | --- | --- |
-| `project-06.jpg` | Projects — Laterite Offices | 4:3 landscape |
-| `project-07.jpg` | Projects — Backwater Pavilions | 4:3 landscape |
-| `project-08.jpg` | Projects — Ochre Apartment | 4:3 landscape |
-| `team-01.jpg` | Team — Ajal Menon | 3:4 portrait |
-| `team-02.jpg` | Team — Neha Raghavan | 3:4 portrait |
-| `team-03.jpg` | Team — Imran Sheikh | 3:4 portrait |
-| `team-04.jpg` | Team — Divya Prakash | 3:4 portrait |
+Images to add now: `project-06.jpg`, `project-07.jpg`, `project-08.jpg` (or delete those
+three slots), and team portraits `team-01.jpg` … `team-04.jpg` (3:4 portrait).
 
-Images already wired up: `slider1.jpg`, `slider2.jpg`, `carousel_1.jpg`,
-`carousel_2.jpg`, `carousel_3.jpg` (projects + hero), and `AJ_MAIN_LOGO.png`.
+## What's on the page
 
-### Adding a whole new project
+| Section | Effect |
+| --- | --- |
+| Hero | Three.js villa: blueprint lines draw in, solids drop into place; on scroll the camera orbits, the sun moves from morning to dusk, then the floors separate into an exploded axonometric with live labels |
+| Marquee | Speed and skew follow scroll velocity |
+| Studio | Words light up as you read; animated counters |
+| Services | 3D tilt cards with a cursor-follow glow; icons redraw on hover |
+| Featured work | Pinned horizontal gallery with cards curved in 3D (swipe on mobile) |
+| Index | Filterable list with a floating preview that tilts with cursor speed |
+| Process | A CSS 3D cube turns one face per step |
+| Principles | Rows hinge down into place on scroll |
+| Footer | Gold wordmark rises letter by letter |
 
-Copy any `<article class="card">` block in `index.html`, change the image `src`,
-the title, the meta line, and the `data-cat` value. `data-cat` must be one of
-`residential`, `workplace`, `hospitality`, `interiors` — that is what the filter
-buttons match on. Add `card--wide` to the class list to make it a full-width row.
-
-The hover brackets, tilt, reveal animation and cursor states are attached by
-`script.js` automatically. You do not need to add them by hand.
-
----
+Every project opens a full-screen case study (Esc to close, ← → to step through).
+`prefers-reduced-motion` is respected, and without WebGL the hero falls back to a photo.
 
 ## Files
 
 | File | Contains |
 | --- | --- |
-| `index.html` | All markup. Sections are in source order: hero → statement → projects → manifesto → story → team → awards → contact. |
-| `home.css` | Design tokens, base type, preloader, hero, and shared section furniture. |
-| `nav.css` | Fixed nav bar and the fullscreen mobile menu. |
-| `product.css` | Projects grid, cards, and the missing-image slot system. |
-| `footer.css` | Footer layout. |
-| `script.js` | Interaction engine — theme, preloader, scroll reveals, split text, nav, filter, tilt, counters, hero lattice, timeline. |
-| `footer.js` | Builds the footer markup, plus the contact form, newsletter and back-to-top. |
+| `index.html` | Markup |
+| `styles.css` | All styles; colour and type tokens are at the top |
+| `main.js` | Scrolling, animations, gallery, index, case study, form |
+| `scene.js` | The 3D hero building |
+| `projects.js` | Project data |
 
-## Theme
+## Before going live
 
-Dark ink is the default and lives in `:root`, so the page paints dark on the first
-frame with no white flash. Light ("paper") is the opt-in override on
-`<html data-theme="light">`; a toggle in the nav switches between them and the
-choice persists in `localStorage`. A small inline script in `<head>` applies a saved
-preference before first paint.
-
-Both themes read from the same custom properties at the top of `home.css` — change a
-colour there and it updates everywhere. The hero and the transparent nav pin their
-own light-on-dark tokens, because they always sit on a dark photograph.
-
-## Known gaps
-
-- **The contact form has no backend.** It validates, then reports success locally.
-  Replace the `setTimeout` in `footer.js` (`ContactForm.init`) with a real `fetch()`
-  when you have an endpoint. The newsletter field is the same.
-- **`AJ_MAIN_LOGO.png` is 5.5 MB**, which is very large for a logo shown at 38px.
-  Exporting it at ~200px wide would cut most of the page's initial weight.
-- All copy — project names, team bios, awards, the manifesto — is placeholder text
-  written to fit the layout. Replace it with the studio's real content.
+- **All copy except the project names is placeholder**: team names, awards, stats,
+  the timeline, address, phone, email and social links (`href="#"`). Replace or remove them.
+- The contact form opens the visitor's email app addressed to `studio@ajalarchitects.com`.
+  Change that address in `main.js` (`initForm`), or swap in a form service such as Formspree.
+- `AJ_MAIN_LOGO.png` (5.5 MB) is kept as the source file; the site uses `logo.png` (320 px).
